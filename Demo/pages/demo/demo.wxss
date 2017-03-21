@@ -1,0 +1,113 @@
+        /*
+        
+            .outer position:relative 名称随意
+            .inner position:absolute 名称随意 z-index值 不可以超过1000
+
+            每个可拖拽元素的高度必须「相同」,且高度必须用「px」
+            控制可拖拽元素top值的Class必须 以 0,1,2...n,n+1 的「整数」「结尾」
+            且其top值 必须为类似 0,100px,200px,300px ... (n-1)*100px,n*100px,的「等差数列」
+            且必须使用 「px」
+
+        */
+
+        page{
+            height: 100%;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            background: #eee;
+        }
+        .container:before{
+          content: " ";
+          display: table;
+        }
+        
+        /* 拖拽相关元素CSS * 重点 */
+        
+        .outer {
+            margin:200rpx auto;
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+        .inner {
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            z-index: 0;
+            transition: top .3s;
+        }
+
+        .row0{
+            top: 0px;
+        }
+
+        .row1{
+            top: 50px;
+        }
+
+        .row2{
+            top: 100px;
+        }
+
+        .row3{
+            top: 150px;
+        }
+
+        .row4{
+            top: 200px;
+        }
+
+        .row5{
+            top: 250px;
+        }
+        
+
+        /* 以下为非重点 Don't waste your time !!! */
+        
+        .outer>view{
+            border: 1px solid #000;
+            box-sizing: border-box;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 70rpx;
+            color: #fff;
+        }
+
+        .color1 {
+            background: #bcf;
+        }
+
+        .color2 {
+            background: #faa;
+        }
+
+        .color3 {
+            background: #afe;
+        }
+
+        .color4 {
+            background: #bef;
+        }
+
+        .color5 {
+            background: #def;
+        }
+
+        .color6 {
+            background: #ece;
+        }
+
+        .confirm{
+            width: 100%;
+            height: 50px;
+            background: #70D231;
+            color: #fff;
+            font-weight: bolder;
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+            bottom: 0px;
+        }
