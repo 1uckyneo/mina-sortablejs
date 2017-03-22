@@ -48,20 +48,23 @@ Page({
         */
 
         let topCssClasses = this.data.topCssClasses;
+        
         topCssClasses = this.data.sort.init(topCssClasses, true);
+        
         this.setData({
             topCssClasses: topCssClasses
         });
+        
         /*
             * 初始化函数 * 必须调用
 
             第一个参数为 * 控制top值的CSS Class数组 * 必填
 
-            *** 第二个参数作用是 打乱顺序 * 可选 默认值为false 
+            第二个参数作用是 打乱顺序 * 可选 默认值为false 
 
-            若打乱顺序需要重新改变this.data.topCssClasses的值
+            若打乱顺序 需要将返回值赋予 this.data.topCssClasses
 
-            * new Sortable() 和 init() 应该放在同一个周期中 (onHide周期中 对象里的属性并未清空)
+            * new Sortable() 和 init() 应该放在同一个周期中 (onHide周期中 sort对象里的属性并未清空)
 
         */
     },
@@ -78,8 +81,7 @@ Page({
         */
     },
     ondrag: function(ev) {
-        let styles = this.data.styles;
-        let data = this.data.sort.dragging(ev, styles);
+        let data = this.data.sort.dragging(ev);
 
         this.setData({
             styles: data[0],
@@ -88,8 +90,8 @@ Page({
 
         /*
            * 拖拽中函数 *
-           第一个参数为 * 事件对象 * 必填
-           第二个参数为 * 控制内联样式的数组 * 必填
+           
+           参数为 * 事件对象 * 必填
 
            返回值 一个数组
            返回数组 0 位置为 控制内联样式的数组
@@ -102,7 +104,7 @@ Page({
 
         let styles = [];
         this.setData({
-            styles: styles,
+            styles: styles
         });
 
         /*

@@ -36,11 +36,15 @@ class Sortable {
         this.upLimit = 0; //拖拽元素的上限
         this.bottomLimit = 0; //拖拽元素的下限
 
-        this.topCssClasses = null; //所有控制元素top值的CSS属性数组|动态变化角标
+        this.idx = []; //此数组的value 映射 控制所有元素top值的CSS属性数组 的 key
+
+        this.styles = []; //控制所有元素的内联样式
+        this.topCssClasses = []; //控制所有元素top值的CSS属性数组
         this.topCssClassNum = null; //开始拖动时,被拖动元素所在行数
         this.rowNumBeforeSwitch = null; //在换行之前拖动元素的所在行
+        this.idNum = null;//此次拖拽元素的Id尾数
         this.lastIdNum = null; //上一次拖拽元素的Id尾数
-        this.data = [];
+        this.data = []; //dragging函数返回数组
 
     }
 
@@ -58,7 +62,6 @@ class Sortable {
         if (disorder) {
             return this.disorder(topCssClasses);
         } else {
-            this.idx = [];
             for (let i = 0; i < this.itemCount; i++) {
                 this.idx[i] = i;
             }
@@ -74,7 +77,6 @@ class Sortable {
         let topCssClass = topCssClasses[0];
         let rowHead = topCssClass.substr(0, topCssClass.length - 1);
 
-        this.idx = [];
         while (this.idx.length < this.itemCount) {
             let randomNum = Math.floor(Math.random() * this.itemCount);
             let notSame = true;
@@ -117,16 +119,15 @@ class Sortable {
             this.rowNumBeforeSwitch = topCssClassNum;
         }
 
-        let styles = [];
-        styles[idNum] = "z-index:1000;box-shadow:0 10px 10px #888;transition:top 0s;" + 'opacity:' + this.opacity + ";";
+        this.styles[idNum] = "z-index:1000;box-shadow:0 10px 10px #888;transition:top 0s;" + 'opacity:' + this.opacity + ";";
 
-        return styles;
+        return this.styles;
 
     }
 
     /* 拖拽中 */
 
-    dragging(ev, styles) {
+    dragging(ev) {
 
         this.pointY_movedNow = ev.touches[0].clientY - this.pointY_dragStart; //记录 此刻 touch Y坐标与 开始移动瞬间 的touch Y坐标之间的 距离
         this.directionY = this.pointY_movedNow - this.pointY_movedLast; //以距离的正或负来决定拖动事件是否为上或下
@@ -138,15 +139,15 @@ class Sortable {
 
         let idNum = this.idNum;
 
-        let targetStyles = styles[idNum].split(";");
+        let targetStyles = this.styles[idNum].split(";");
         targetStyles.pop();
         let moved = this.topFromFatherStart + this.pointY_movedNow;
         targetStyles.push("top:" + moved + "px");
         targetStyles = targetStyles.join(";");
 
-        styles[idNum] = targetStyles;
+        this.styles[idNum] = targetStyles;
 
-        this.data[0] = styles;
+        this.data[0] = this.styles;
         this.data[1] = this.topCssClasses;
 
         //实时获取此刻拖动元素与父元素的距离
@@ -266,6 +267,9 @@ class Sortable {
     /* 拖拽结束 */
 
     dragEnd() {
+        
+        this.styles = [];
+
         this.lastIdNum = this.idNum; //记录下这次的id尾数
 
         let ordered;
