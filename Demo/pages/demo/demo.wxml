@@ -3,12 +3,44 @@
 
 <view class="container" >
         <view class="outer">
-                <view id="{{ids[0]}}" class="inner color1 {{topCssClasses[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">1</view>
-                <view id="{{ids[1]}}" class="inner color2 {{topCssClasses[1]}}" style="{{styles[1]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">2</view>
-                <view id="{{ids[2]}}" class="inner color3 {{topCssClasses[2]}}" style="{{styles[2]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">3</view>
-                <view id="{{ids[3]}}" class="inner color4 {{topCssClasses[3]}}" style="{{styles[3]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">4</view>
-                <view id="{{ids[4]}}" class="inner color5 {{topCssClasses[4]}}" style="{{styles[4]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">5</view>
-                <view id="{{ids[5]}}" class="inner color6 {{topCssClasses[5]}}" style="{{styles[5]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">6</view>
+                <view id="{{ids[0]}}" class="inner {{topCssClasses[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">1</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
+                <view id="{{ids[1]}}" class="inner {{topCssClasses[1]}}" style="{{styles[1]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">2</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
+                <view id="{{ids[2]}}" class="inner {{topCssClasses[2]}}" style="{{styles[2]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">3</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
+                <view id="{{ids[3]}}" class="inner {{topCssClasses[3]}}" style="{{styles[3]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">4</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
+                <view id="{{ids[4]}}" class="inner {{topCssClasses[4]}}" style="{{styles[4]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">5</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
+                <view id="{{ids[5]}}" class="inner {{topCssClasses[5]}}" style="{{styles[5]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+                  <text class="content">6</text>
+                  <view class="rt">
+                    <text class="fa fa-bars" aria-hidden="true"></text>
+                  </view>
+                </view>
         </view>
  </view>
- <view class="confirm">确定</view>
+ <view class="confirm" bindtap="onConfirm">确定
+ <text class="fa fa-check" aria-hidden="true"></text>
+ </view>

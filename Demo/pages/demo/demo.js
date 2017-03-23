@@ -22,7 +22,11 @@ Page({
             'row2',
             'row3',
             'row4',
-            'row5'
+            'row5',
+            'row6',
+            'row7',
+            'row8',
+            'row9'
         ],
         styles: [],
         ids: [
@@ -31,7 +35,11 @@ Page({
             'r2',
             'r3',
             'r4',
-            'r5'
+            'r5',
+            'r6',
+            'r7',
+            'r8',
+            'r9'
         ]
     },
     onShow: function() {
@@ -49,7 +57,7 @@ Page({
 
         let topCssClasses = this.data.topCssClasses;
         
-        topCssClasses = this.data.sort.init(topCssClasses, true);
+        topCssClasses = this.data.sort.init(topCssClasses,true);
         
         this.setData({
             topCssClasses: topCssClasses
@@ -100,7 +108,7 @@ Page({
         */
     },
     ondragend: function() {
-        let ordered = this.data.sort.dragEnd();
+        this.data.ordered = this.data.sort.dragEnd();
 
         let styles = [];
         this.setData({
@@ -116,6 +124,11 @@ Page({
 
         */
         console.log(ordered);
+    },
+    onConfirm:function(){
+            wx.showToast({
+                title:this.data.ordered?"顺序正确":"顺序错误"
+            })
     },
     onShareAppMessage: function() {
         return {

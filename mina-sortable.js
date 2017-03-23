@@ -62,8 +62,11 @@ class Sortable {
         if (disorder) {
             return this.disorder(topCssClasses);
         } else {
+            let topCssClass = topCssClasses[0];
+            let rowHead = topCssClass.substr(0, topCssClass.length - 1);
             for (let i = 0; i < this.itemCount; i++) {
                 this.idx[i] = i;
+                topCssClasses[i] = rowHead + i;
             }
             return topCssClasses;
         }
@@ -119,7 +122,7 @@ class Sortable {
             this.rowNumBeforeSwitch = topCssClassNum;
         }
 
-        this.styles[idNum] = "z-index:1000;box-shadow:0 10px 10px #888;transition:top 0s;" + 'opacity:' + this.opacity + ";";
+        this.styles[idNum] = "border-color:#aaa;z-index:1000;box-shadow:0 10px 10px #888;transition:top 0s;opacity:" + this.opacity + ";";
 
         return this.styles;
 
