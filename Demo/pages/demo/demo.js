@@ -10,8 +10,6 @@ Page({
 
         topCssClasses数组内的每一个Class值名称要以整数结尾,并且从0开始升序排列
 
-        必须给每一个需要拖动的元素一个id值,id值的命名规范同上 * 命名不强制
-
         控制内联样式的数组 styles  * 命名不强制
 
         */
@@ -22,25 +20,9 @@ Page({
             'row2',
             'row3',
             'row4',
-            'row5',
-            'row6',
-            'row7',
-            'row8',
-            'row9'
+            'row5'
         ],
-        styles: [],
-        ids: [
-            'r0',
-            'r1',
-            'r2',
-            'r3',
-            'r4',
-            'r5',
-            'r6',
-            'r7',
-            'r8',
-            'r9'
-        ]
+        styles: []
     },
     onShow: function() {
         this.data.sort = new Sortable(6, 50, 25);
@@ -126,7 +108,8 @@ Page({
     },
     onConfirm:function(){
             wx.showToast({
-                title:this.data.ordered?"顺序正确":"顺序错误"
+                title:this.data.ordered?"顺序正确":"顺序错误",
+                duration:5000
             })
     },
     onShareAppMessage: function() {
