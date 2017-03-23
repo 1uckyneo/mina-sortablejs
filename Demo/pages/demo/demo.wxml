@@ -1,42 +1,48 @@
 <!--可拖拽元素外必须有一个父节点元素-->
-<!--可拖拽元素要 从上到下 以 * 0到n 数字结尾 * 的规则命名id,可为*纯数字* -->
+<!--   
+*** 可拖拽元素要必须要填写id值 
+*** id值命名规范:
+①  字母-整数 
+② 「整数」部分 必须是 0,1,2...n,n+1 的等差数列 且必须以0开始
+③  或者直接参考 第②条规则 只使用「纯整数」作为id值
+-->
 <!--拖拽事件 * 必须为catch 不可以bind * -->
 
 <view class="container" >
         <view class="outer">
                 <view id="0" class="inner {{topCssClasses[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">1</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>
                 <view id="1" class="inner {{topCssClasses[1]}}" style="{{styles[1]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">2</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>
                 <view id="2" class="inner {{topCssClasses[2]}}" style="{{styles[2]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">3</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>
                 <view id="3" class="inner {{topCssClasses[3]}}" style="{{styles[3]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">4</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>
                 <view id="4" class="inner {{topCssClasses[4]}}" style="{{styles[4]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">5</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>
                 <view id="5" class="inner {{topCssClasses[5]}}" style="{{styles[5]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
                   <text class="content">6</text>
-                  <view class="rt">
+                  <view class="bars-container">
                     <text class="fa fa-bars" aria-hidden="true"></text>
                   </view>
                 </view>

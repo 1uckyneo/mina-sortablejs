@@ -1,9 +1,17 @@
+        @import '/font-awesome/font-awesome.wxss';
+        
         /*
 
-            每个可拖拽元素的高度必须「相同」,且高度必须用「px」
-            控制可拖拽元素top值的Class必须 以 0,1,2...n,n+1 的「整数」「结尾」
+            每个可拖拽元素的高度必须「相同」 * 且高度必须用「px」 不可以使用「rpx」
+            
+            控制可拖拽元素top值的Class命名规范:
+            
+            ① 字母-整数 ② 「整数」部分 必须是 0,1,2...n,n+1 的等差数列 且必须以0开始
+            
+            参考: row-0,row-1,row-3
+            
             且其top值 必须为类似 0,100px,200px,300px ... (n-1)*100px,n*100px,的「等差数列」
-            且必须使用 「px」
+            且必须使用 「px」 不可以使用「rpx」
 
         */
 
@@ -39,27 +47,27 @@
             transition: all .3s;
         }
 
-        .row0{
+        .row-0{
             top: 0px;
         }
-        .row1{
+        .row-1{
             top: 50px;
         }
-        .row2{
+        .row-2{
             top: 100px;
         }
-        .row3{
+        .row-3{
             top: 150px;
         }
-        .row4{
+        .row-4{
             top: 200px;
         }
-        .row5{
+        .row-5{
             top: 250px;
         }
 
 
-        /* 以下为非重点 Don't waste your time !!! */
+        /* 以下为非重点 */
         .outer{
            margin:150px auto;
            width: 300px;
@@ -70,11 +78,20 @@
 
         .inner{
           width: 300px;
-          border-radius: 10px;
           text-align: center;
           line-height: 50px;
           background: transparent;
         }
+
+        .bars-container{
+          display: inline-block;
+          position: absolute;
+          right: 15px;
+          font-size: 15px;
+          color: #aaa;
+        }
+
+        /* Don't waste your time !!! */
 
         .content{
             font-size: 60rpx;
@@ -93,10 +110,4 @@
             bottom: 0px;
         }
 
-        .rt{
-          display: inline-block;
-          position: absolute;
-          right: 12px;
-          font-size: 15px;
-          color: #aaa;
-        }
+        

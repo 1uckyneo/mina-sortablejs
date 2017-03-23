@@ -63,10 +63,10 @@ class Sortable {
             return this.disorder(topCssClasses);
         } else {
             let topCssClass = topCssClasses[0];
-            let rowHead = topCssClass.substr(0, topCssClass.length - 1);
+            let classHead = topCssClass.split('-')[0]+'-';
             for (let i = 0; i < this.itemCount; i++) {
                 this.idx[i] = i;
-                topCssClasses[i] = rowHead + i;
+                topCssClasses[i] = classHead + i;
             }
             return topCssClasses;
         }
@@ -78,7 +78,7 @@ class Sortable {
     disorder(topCssClasses) {
 
         let topCssClass = topCssClasses[0];
-        let rowHead = topCssClass.substr(0, topCssClass.length - 1);
+        let classHead = topCssClass.split('-')[0]+'-';
 
         while (this.idx.length < this.itemCount) {
             let randomNum = Math.floor(Math.random() * this.itemCount);
@@ -98,7 +98,7 @@ class Sortable {
 
         for (let i = 0; i < this.idx.length; i++) {
             let key = this.idx[i];
-            topCssClasses[key] = rowHead + i;
+            topCssClasses[key] = classHead + i;
         }
         this.topCssClasses = topCssClasses;
 
@@ -114,15 +114,15 @@ class Sortable {
         this.pointY_dragStart = ev.touches[0].clientY; //获取并保存住:开始拖动元素时的touch Y坐标
 
         let id = this.theTarget.id;
-        let idNum = this.idNum = parseInt(id.substr(id.length - 1, 1));
+        let idNum = this.idNum = Number(id.split('-')[0]);
         let topCssClass = this.topCssClasses[idNum];
-        let topCssClassNum = this.topCssClassNum = parseInt(topCssClass.substr(topCssClass.length - 1, 1));
+        let topCssClassNum = this.topCssClassNum = Number(topCssClass.split('-')[1]);
 
         if (idNum !== this.lastIdNum) {
             this.rowNumBeforeSwitch = topCssClassNum;
         }
 
-        this.styles[idNum] = "border-color:#aaa;z-index:1000;box-shadow:0 10px 10px #888;transition:top 0s;opacity:" + this.opacity + ";";
+        this.styles[idNum] = `z-index:1000;border-color:#aaa;border-radius:0;box-shadow:0 10px 10px #888;transition:top 0s;opacity:${this.opacity};`;
 
         return this.styles;
 
@@ -154,7 +154,7 @@ class Sortable {
         this.data[1] = this.topCssClasses;
 
         //实时获取此刻拖动元素与父元素的距离
-        this.topFromFatherNow = parseInt(moved);
+        this.topFromFatherNow = moved;
 
         //元素向下拖动时
         if (this.directionY > 0) {
