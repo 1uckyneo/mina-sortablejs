@@ -1,16 +1,16 @@
 class Sortable {
 
-    constructor(itemCount, topAvg, spaceLimit, opacity = .5) {
+    constructor(topCssClasses,topAvg, spaceLimit, opacity = .5) {
 
-        this.itemCount = itemCount;
+        this.topCssClasses = topCssClasses;
         this.topAvg = topAvg;
         this.spaceLimit = spaceLimit;
         this.opacity = opacity;
 
         /*
 
-        itemCount
-        拖拽元素的数量
+        topCssClasses
+        控制所有元素top值的CSS属性数组
 
         topAvg
         上一个拖拽元素顶部与下一个拖拽元素顶部的间距
@@ -25,6 +25,7 @@ class Sortable {
 
         */
 
+        this.itemCount = topCssClasses.length;//拖拽元素的数量
         this.theTarget = null; //被拖拽元素
         this.topFromFatherStart = 0; //获取开始拖动瞬间,元素与父元素的距离
         this.pointY_dragStart = 0; //拖拽开始瞬间touch Y坐标
@@ -39,7 +40,6 @@ class Sortable {
         this.idx = []; //此数组的value 映射 控制所有元素top值的CSS属性数组 的 key
 
         this.styles = []; //控制所有元素的内联样式
-        this.topCssClasses = []; //控制所有元素top值的CSS属性数组
         this.topCssClassNum = null; //开始拖动时,被拖动元素所在行数
         this.rowNumBeforeSwitch = null; //在换行之前拖动元素的所在行
         this.idNum = null;//此次拖拽元素的Id尾数
@@ -50,9 +50,9 @@ class Sortable {
 
     /*初始化*/
 
-    init(topCssClasses, disorder) {
+    init(disorder) {
 
-        this.topCssClasses = topCssClasses;
+        let topCssClasses = this.topCssClasses;
 
         if (this.spaceLimit !== undefined) {
             this.upLimit = -this.spaceLimit; //拖拽元素的上区间
@@ -68,6 +68,7 @@ class Sortable {
                 this.idx[i] = i;
                 topCssClasses[i] = classHead + i;
             }
+            this.topCssClasses = topCssClasses;
             return topCssClasses;
         }
 

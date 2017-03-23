@@ -25,36 +25,29 @@ Page({
         styles: []
     },
     onShow: function() {
-        this.data.sort = new Sortable(6, 50, 25);
-        /*
+        let topCssClasses = this.data.topCssClasses;
+        this.data.sort = new Sortable(topCssClasses,50, 25);
+         /* 
+          需要将实例化的Sortable对象赋值在this.data对象中
 
-          需要将new出来的对象赋值给this.data对象中
-
-          第一个参数为 可拖拽元素「数量」* 必选
+          第一个参数为 控制拖拽元素top值的CSS Class数组 * 必填
           第二个参数为 每一个拖拽元素的上边框与下一个元素的上边框之间的「距离」* 必选
           第三个参数为 拖拽时元素可超出的最上和最下的距离「区间」* 可选 默认无限制
           第四个参数为 被拖拽元素的不透明度 * 可选 默认值0.5
-
-        */
-
-        let topCssClasses = this.data.topCssClasses;
-        
-        topCssClasses = this.data.sort.init(topCssClasses,true);
-        
+         */
+        topCssClasses = this.data.sort.init(true);
         this.setData({
             topCssClasses: topCssClasses
         });
-        
         /*
-            * 初始化函数 * 必须调用
+            * init() 初始化函数 * 必须调用
+            
+            参数为布尔值 作用是随机打乱 topCssClasses数组顺序 * 可选 默认值为false 
 
-            第一个参数为 * 控制top值的CSS Class数组 * 必填
+            需要将返回数组赋予 this.data.topCssClasses数组 
+            用于改变inner view的排列顺序
 
-            第二个参数作用是 打乱顺序 * 可选 默认值为false 
-
-            若打乱顺序 需要将返回值赋予 this.data.topCssClasses
-
-            * new Sortable() 和 init() 应该放在同一个周期中 (onHide周期中 sort对象里的属性并未清空)
+            *** new Sortable() 和 init() 应该放在同一个onLoad或者onShow周期中 (onHide周期中 this.data.sort对象里的属性并未清空)
 
         */
     },
@@ -112,6 +105,8 @@ Page({
                 duration:5000
             })
     },
+    
+    
     onShareAppMessage: function() {
         return {
             title: 'mina-sortable | 拖拽排序插件',
