@@ -123,7 +123,6 @@ Page({
             *** 拖拽结束后 必须清空 控制内联样式的数组
 
         */
-        console.log(ordered);
     },
     onConfirm:function(){
             wx.showToast({

@@ -1,5 +1,13 @@
 {
   "pages":[
     "pages/demo/demo"
-  ]
+  ],
+  "window": {
+  "navigationBarBackgroundColor": "#51C332",
+  "navigationBarTextStyle": "#fff",
+  "navigationBarTitleText": "拖拽排序插件 | mina-sortablejs",
+  "backgroundColor": "#eee",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": false
+}
 }
