@@ -145,17 +145,14 @@ class Sortable {
 
         let targetStyles = this.styles[idNum].split(";");
         targetStyles.pop();
-        let moved = this.topFromFatherStart + this.pointY_movedNow;
-        targetStyles.push("top:" + moved + "px");
+        this.topFromFatherNow = this.topFromFatherStart + this.pointY_movedNow;//实时获取此刻拖动元素与父元素的距离
+        targetStyles.push(`top:${this.topFromFatherNow}px`);
         targetStyles = targetStyles.join(";");
 
         this.styles[idNum] = targetStyles;
 
         this.data[0] = this.styles;
         this.data[1] = this.topCssClasses;
-
-        //实时获取此刻拖动元素与父元素的距离
-        this.topFromFatherNow = moved;
 
         //元素向下拖动时
         if (this.directionY > 0) {
@@ -186,7 +183,7 @@ class Sortable {
         let idx = this.idx;
 
         for (let i = (this.itemCount - 1); i > 0; i--) {
-            let switchLine = i * this.topAvg - this.topAvg / 2;
+            let switchLine = i * this.topAvg - this.topAvg * .25;
             if (this.topFromFatherNow > switchLine) {
                 if (i !== rNBS) {
 
@@ -220,7 +217,7 @@ class Sortable {
         let idx = this.idx;
 
         for (let i = 0; i < (this.itemCount - 1); i++) {
-            let switchLine = i * this.topAvg + this.topAvg / 2;
+            let switchLine = i * this.topAvg + this.topAvg * .25;
             if (this.topFromFatherNow < switchLine) {
                 if (i !== this.rowNumBeforeSwitch) {
 
@@ -270,23 +267,27 @@ class Sortable {
 
     /* 拖拽结束 */
 
-    dragEnd() {
+    dragEnd(needIdx) {
         
         this.styles = [];
 
         this.lastIdNum = this.idNum; //记录下这次的id尾数
 
-        let ordered;
-        for (let i = 0; i < this.idx.length; i++) {
-            if (i !== this.idx[i]) {
-                ordered = false;
-                break;
-            } else {
-                ordered = true;
+        if(needIdx){
+            return this.idx;
+        }else {
+            let ordered;
+            for (let i = 0; i < this.idx.length; i++) {
+                if (i !== this.idx[i]) {
+                    ordered = false;
+                    break;
+                } else {
+                    ordered = true;
+                }
             }
-        }
 
-        return ordered;
+            return ordered;
+        }
 
     }
 

@@ -42,8 +42,6 @@
             /* 以下为强制要求 */
             position: absolute;
             z-index: 0;
-            border: 1px solid transparent;
-            box-sizing: border-box;
             transition: all .3s;
         }
 
@@ -77,6 +75,10 @@
         }
 
         .inner{
+          border:1px solid transparent;
+          box-sizing: border-box;
+          border-left: 0;
+          border-right: 0;
           width: 300px;
           text-align: center;
           line-height: 50px;
