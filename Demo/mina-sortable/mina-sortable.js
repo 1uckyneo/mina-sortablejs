@@ -1,6 +1,6 @@
 class Sortable {
 
-    constructor(topCssClasses,topAvg, spaceLimit, opacity = .5) {
+    constructor(topCssClasses, topAvg, spaceLimit, opacity = .5) {
 
         this.topCssClasses = topCssClasses;
         this.topAvg = topAvg;
@@ -25,7 +25,7 @@ class Sortable {
 
         */
 
-        this.itemCount = topCssClasses.length;//拖拽元素的数量
+        this.itemCount = topCssClasses.length; //拖拽元素的数量
         this.theTarget = null; //被拖拽元素
         this.topFromFatherStart = 0; //获取开始拖动瞬间,元素与父元素的距离
         this.pointY_dragStart = 0; //拖拽开始瞬间touch Y坐标
@@ -42,7 +42,7 @@ class Sortable {
         this.styles = []; //控制所有元素的内联样式
         this.topCssClassNum = null; //开始拖动时,被拖动元素所在行数
         this.rowNumBeforeSwitch = null; //在换行之前拖动元素的所在行
-        this.idNum = null;//此次拖拽元素的Id尾数
+        this.idNum = null; //此次拖拽元素的Id尾数
         this.lastIdNum = null; //上一次拖拽元素的Id尾数
         this.data = []; //dragging函数返回数组
 
@@ -63,7 +63,7 @@ class Sortable {
             return this.disorder(topCssClasses);
         } else {
             let topCssClass = topCssClasses[0];
-            let classHead = topCssClass.split('-')[0]+'-';
+            let classHead = topCssClass.split('-')[0] + '-';
             for (let i = 0; i < this.itemCount; i++) {
                 this.idx[i] = i;
                 topCssClasses[i] = classHead + i;
@@ -79,7 +79,7 @@ class Sortable {
     disorder(topCssClasses) {
 
         let topCssClass = topCssClasses[0];
-        let classHead = topCssClass.split('-')[0]+'-';
+        let classHead = topCssClass.split('-')[0] + '-';
 
         while (this.idx.length < this.itemCount) {
             let randomNum = Math.floor(Math.random() * this.itemCount);
@@ -145,7 +145,7 @@ class Sortable {
 
         let targetStyles = this.styles[idNum].split(";");
         targetStyles.pop();
-        this.topFromFatherNow = this.topFromFatherStart + this.pointY_movedNow;//实时获取此刻拖动元素与父元素的距离
+        this.topFromFatherNow = this.topFromFatherStart + this.pointY_movedNow; //实时获取此刻拖动元素与父元素的距离
         targetStyles.push(`top:${this.topFromFatherNow}px`);
         targetStyles = targetStyles.join(";");
 
@@ -183,10 +183,9 @@ class Sortable {
         let idx = this.idx;
 
         for (let i = (this.itemCount - 1); i > 0; i--) {
-            let switchLine = i * this.topAvg - this.topAvg * .25;
+            let switchLine = i * this.topAvg - this.topAvg / 3;
             if (this.topFromFatherNow > switchLine) {
-                if (i !== rNBS) {
-
+                if (i > rNBS) {
                     [
                         topCssClasses[idx[rNBS]],
                         topCssClasses[idx[rNBS + 1]]
@@ -217,9 +216,9 @@ class Sortable {
         let idx = this.idx;
 
         for (let i = 0; i < (this.itemCount - 1); i++) {
-            let switchLine = i * this.topAvg + this.topAvg * .25;
+            let switchLine = i * this.topAvg + this.topAvg / 3;
             if (this.topFromFatherNow < switchLine) {
-                if (i !== this.rowNumBeforeSwitch) {
+                if (i < rNBS) {
 
                     [
                         topCssClasses[idx[rNBS]],
@@ -268,14 +267,14 @@ class Sortable {
     /* 拖拽结束 */
 
     dragEnd(needIdx) {
-        
+
         this.styles = [];
 
         this.lastIdNum = this.idNum; //记录下这次的id尾数
 
-        if(needIdx){
+        if (needIdx) {
             return this.idx;
-        }else {
+        } else {
             let ordered;
             for (let i = 0; i < this.idx.length; i++) {
                 if (i !== this.idx[i]) {
