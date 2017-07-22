@@ -8,46 +8,46 @@
 -->
 <!--拖拽事件 * 必须为catch 不可以bind * -->
 
-<view class="container" >
-        <view class="outer">
-                <view id="0" class="inner {{topCssClasses[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">1</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-                <view id="1" class="inner {{topCssClasses[1]}}" style="{{styles[1]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">2</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-                <view id="2" class="inner {{topCssClasses[2]}}" style="{{styles[2]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">3</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-                <view id="3" class="inner {{topCssClasses[3]}}" style="{{styles[3]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">4</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-                <view id="4" class="inner {{topCssClasses[4]}}" style="{{styles[4]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">5</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-                <view id="5" class="inner {{topCssClasses[5]}}" style="{{styles[5]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
-                  <text class="content">6</text>
-                  <view class="bars-container">
-                    <text class="fa fa-bars" aria-hidden="true"></text>
-                  </view>
-                </view>
-        </view>
- </view>
- <view class="confirm" bindtap="onConfirm">确定
- <text class="fa fa-check" aria-hidden="true"></text>
- </view>
+<view class="container">
+  <view class="outer">
+    <view id="0" class="inner {{topList[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">1</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+    <view id="1" class="inner {{topList[1]}}" style="{{styles[1]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">2</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+    <view id="2" class="inner {{topList[2]}}" style="{{styles[2]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">3</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+    <view id="3" class="inner {{topList[3]}}" style="{{styles[3]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">4</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+    <view id="4" class="inner {{topList[4]}}" style="{{styles[4]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">5</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+    <view id="5" class="inner {{topList[5]}}" style="{{styles[5]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
+      <text class="content">6</text>
+      <view class="bars-container">
+        <text class="fa fa-bars" aria-hidden="true"></text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="confirm" bindtap="onConfirm">确定
+  <text class="fa fa-check" aria-hidden="true"></text>
+</view>

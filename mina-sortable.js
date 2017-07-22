@@ -1,15 +1,15 @@
 class Sortable {
 
-    constructor(topCssClasses, topAvg, spaceLimit, opacity = .5) {
+    constructor(arg) {
 
-        this.topCssClasses = topCssClasses;
-        this.topAvg = topAvg;
-        this.spaceLimit = spaceLimit;
-        this.opacity = opacity;
+        this.topList = arg.topList;
+        this.topAvg = arg.topAvg;
+        this.spaceLimit = arg.spaceLimit ? arg.spaceLimit : this.topAvg / 2;
+        this.opacity = arg.opacity ? arg.opacity : .5;
 
         /*
 
-        topCssClasses
+        topList
         控制所有元素top值的CSS属性数组
 
         topAvg
@@ -25,8 +25,8 @@ class Sortable {
 
         */
 
-        this.itemCount = topCssClasses.length; //拖拽元素的数量
-        this.theTarget = null; //被拖拽元素
+        this.itemCount = this.topList.length; //拖拽元素的数量
+        this.target = null; //被拖拽元素
         this.topFromFatherStart = 0; //获取开始拖动瞬间,元素与父元素的距离
         this.pointY_dragStart = 0; //拖拽开始瞬间touch Y坐标
         this.pointY_movedNow = 0; //拖拽期间 touch此刻移动距离
@@ -40,11 +40,11 @@ class Sortable {
         this.idx = []; //此数组的value 映射 控制所有元素top值的CSS属性数组 的 key
 
         this.styles = []; //控制所有元素的内联样式
-        this.topCssClassNum = null; //开始拖动时,被拖动元素所在行数
+        this.targetTopNum = null; //开始拖动时,被拖动元素所在行数
         this.rowNumBeforeSwitch = null; //在换行之前拖动元素的所在行
         this.idNum = null; //此次拖拽元素的Id尾数
         this.lastIdNum = null; //上一次拖拽元素的Id尾数
-        this.data = []; //dragging函数返回数组
+        this.cssList = []; //dragging函数返回数组
 
     }
 
@@ -52,7 +52,7 @@ class Sortable {
 
     init(disorder) {
 
-        let topCssClasses = this.topCssClasses;
+        let topList = this.topList;
 
         if (this.spaceLimit !== undefined) {
             this.upLimit = -this.spaceLimit; //拖拽元素的上区间
@@ -60,26 +60,26 @@ class Sortable {
         }
 
         if (disorder) {
-            return this.disorder(topCssClasses);
+            return this.disorder(topList);
         } else {
-            let topCssClass = topCssClasses[0];
-            let classHead = topCssClass.split('-')[0] + '-';
+            let targetTop = topList[0];
+            let classHead = targetTop.split('-')[0] + '-';
             for (let i = 0; i < this.itemCount; i++) {
                 this.idx[i] = i;
-                topCssClasses[i] = classHead + i;
+                topList[i] = classHead + i;
             }
-            this.topCssClasses = topCssClasses;
-            return topCssClasses;
+            this.topList = topList;
+            return topList;
         }
 
     }
 
     /* 打乱顺序  *  只在init函数第二个参数为true才触发 */
 
-    disorder(topCssClasses) {
+    disorder(topList) {
 
-        let topCssClass = topCssClasses[0];
-        let classHead = topCssClass.split('-')[0] + '-';
+        let targetTop = topList[0];
+        let classHead = targetTop.split('-')[0] + '-';
 
         while (this.idx.length < this.itemCount) {
             let randomNum = Math.floor(Math.random() * this.itemCount);
@@ -99,28 +99,28 @@ class Sortable {
 
         for (let i = 0; i < this.idx.length; i++) {
             let key = this.idx[i];
-            topCssClasses[key] = classHead + i;
+            topList[key] = classHead + i;
         }
-        this.topCssClasses = topCssClasses;
+        this.topList = topList;
 
-        return topCssClasses
+        return topList
     }
 
     /* 拖拽开始 */
 
     dragStart(ev) {
 
-        this.theTarget = ev.currentTarget; //获取拖动元素
-        this.topFromFatherStart = this.theTarget.offsetTop; //获取开始拖动瞬间元素与父元素的距离
+        this.target = ev.currentTarget; //获取拖动元素
+        this.topFromFatherStart = this.target.offsetTop; //获取开始拖动瞬间元素与父元素的距离
         this.pointY_dragStart = ev.touches[0].clientY; //获取并保存住:开始拖动元素时的touch Y坐标
 
-        let id = this.theTarget.id;
+        let id = this.target.id;
         let idNum = this.idNum = Number(id.split('-')[0]);
-        let topCssClass = this.topCssClasses[idNum];
-        let topCssClassNum = this.topCssClassNum = Number(topCssClass.split('-')[1]);
+        let targetTop = this.topList[idNum];
+        let targetTopNum = this.targetTopNum = Number(targetTop.split('-')[1]);
 
         if (idNum !== this.lastIdNum) {
-            this.rowNumBeforeSwitch = topCssClassNum;
+            this.rowNumBeforeSwitch = targetTopNum;
         }
 
         this.styles[idNum] = `z-index:1000;border-color:#aaa;border-radius:0;box-shadow:0 10px 10px #888;transition:top 0s;opacity:${this.opacity};`;
@@ -151,8 +151,8 @@ class Sortable {
 
         this.styles[idNum] = targetStyles;
 
-        this.data[0] = this.styles;
-        this.data[1] = this.topCssClasses;
+        this.cssList[0] = this.styles;
+        this.cssList[1] = this.topList;
 
         //元素向下拖动时
         if (this.directionY > 0) {
@@ -170,7 +170,7 @@ class Sortable {
             用正负关系来确定元素是否上下移动
         */
 
-        return this.data;
+        return this.cssList;
 
     }
 
@@ -179,22 +179,21 @@ class Sortable {
     moveDownward() {
 
         let rNBS = this.rowNumBeforeSwitch;
-        let topCssClasses = this.topCssClasses;
+        let topList = this.topList;
         let idx = this.idx;
 
         for (let i = (this.itemCount - 1); i > 0; i--) {
-            let switchLine = i * this.topAvg - this.topAvg / 3;
+            let switchLine = i * this.topAvg - this.topAvg / 2;
             if (this.topFromFatherNow > switchLine) {
                 if (i > rNBS) {
                     [
-                        topCssClasses[idx[rNBS]],
-                        topCssClasses[idx[rNBS + 1]]
+                        topList[idx[rNBS]],
+                        topList[idx[rNBS + 1]]
                     ] = [
-                        topCssClasses[idx[rNBS + 1]],
-                        topCssClasses[idx[rNBS]]
+                        topList[idx[rNBS + 1]],
+                        topList[idx[rNBS]]
                     ];
-                    this.data[1] = topCssClasses;
-                    this.topCssClasses = topCssClasses;
+                    this.cssList[1] = topList;
 
                     let arr = this.idx.splice(rNBS, 1);
                     this.idx.splice(rNBS + 1, 0, arr[0]);
@@ -212,23 +211,22 @@ class Sortable {
     moveUpward() {
 
         let rNBS = this.rowNumBeforeSwitch;
-        let topCssClasses = this.topCssClasses;
+        let topList = this.topList;
         let idx = this.idx;
 
         for (let i = 0; i < (this.itemCount - 1); i++) {
-            let switchLine = i * this.topAvg + this.topAvg / 3;
+            let switchLine = i * this.topAvg + this.topAvg / 2;
             if (this.topFromFatherNow < switchLine) {
                 if (i < rNBS) {
 
                     [
-                        topCssClasses[idx[rNBS]],
-                        topCssClasses[idx[rNBS - 1]]
+                        topList[idx[rNBS]],
+                        topList[idx[rNBS - 1]]
                     ] = [
-                        topCssClasses[idx[rNBS - 1]],
-                        topCssClasses[idx[rNBS]]
+                        topList[idx[rNBS - 1]],
+                        topList[idx[rNBS]]
                     ];
-                    this.data[1] = topCssClasses;
-                    this.topCssClasses = topCssClasses;
+                    this.cssList[1] = topList;
 
                     let arr = this.idx.splice(rNBS, 1);
                     this.idx.splice(rNBS - 1, 0, arr[0]);
@@ -245,9 +243,9 @@ class Sortable {
 
     giveSpaceLimitDyna() {
 
-        let topCssClassNum = this.topCssClassNum;
+        let targetTopNum = this.targetTopNum;
         for (let i = 0; i < this.itemCount; i++) {
-            if (topCssClassNum === i) {
+            if (targetTopNum === i) {
 
                 /*
 

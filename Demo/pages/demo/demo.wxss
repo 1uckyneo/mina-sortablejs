@@ -1,5 +1,4 @@
         @import '/font-awesome/font-awesome.wxss';
-        
         /*
 
             每个可拖拽元素的高度必须「相同」 * 且高度必须用「px」 不可以使用「rpx」
@@ -15,92 +14,94 @@
 
         */
 
-        page{
+        page {
             background: #eee;
         }
-        .container::before{
-          content: " ";
-          display: table;
+
+        .container::before {
+            content: " ";
+            display: table;
         }
 
-        .container::after{
-          content: " ";
-          display: table;
+        .container::after {
+            content: " ";
+            display: table;
         }
-
         /* 拖拽相关元素CSS * 重点 */
 
         .outer {
             height: 300px;
-
             /* 以下为强制要求 */
             position: relative;
         }
+
         .inner {
             height: 50px;
-
             /* 以下为强制要求 */
             position: absolute;
             z-index: 0;
             transition: all .3s;
         }
 
-        .row-0{
+        .row-0 {
             top: 0px;
         }
-        .row-1{
+
+        .row-1 {
             top: 50px;
         }
-        .row-2{
+
+        .row-2 {
             top: 100px;
         }
-        .row-3{
+
+        .row-3 {
             top: 150px;
         }
-        .row-4{
+
+        .row-4 {
             top: 200px;
         }
-        .row-5{
+
+        .row-5 {
             top: 250px;
         }
-
-
         /* 以下为非重点 */
-        .outer{
-           margin:150px auto;
-           width: 300px;
-           border: 1px solid #aaa;
-           border-radius: 10px;
-           background: #fff;
+
+        .outer {
+            margin: 150px auto;
+            width: 300px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            background: #fff;
         }
 
-        .inner{
-          border:1px solid transparent;
-          box-sizing: border-box;
-          border-left: 0;
-          border-right: 0;
-          width: 300px;
-          text-align: center;
-          line-height: 50px;
-          background: transparent;
+        .inner {
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            border-left: 0;
+            border-right: 0;
+            width: 300px;
+            text-align: center;
+            line-height: 50px;
+            background: transparent;
         }
 
-        .bars-container{
-          display: inline-block;
-          position: absolute;
-          right: 15px;
-          font-size: 15px;
-          color: #aaa;
+        .bars-container {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            font-size: 15px;
+            color: #aaa;
         }
-
         /* Don't waste your time !!! */
 
-        .content{
+        .content {
             font-size: 60rpx;
             color: #333;
         }
 
-        .confirm{
+        .confirm {
             width: 100%;
             height: 50px;
             background: #51C332;
@@ -111,5 +112,3 @@
             position: fixed;
             bottom: 0px;
         }
-
-        
