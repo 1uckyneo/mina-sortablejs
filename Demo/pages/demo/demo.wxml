@@ -1,13 +1,10 @@
-<!--可拖拽元素外必须有一个父节点元素-->
-<!--   
-*** 可拖拽元素要必须要填写id值 
+<!-- 可拖拽元素外必须有一个父节点元素 -->
+<!-- *** 可拖拽元素要必须要填写id值 
 *** id值命名规范:
 ①  字母-整数 
 ② 「整数」部分 必须是 0,1,2...n,n+1 的等差数列 且必须以0开始
-③  或者直接参考 第②条规则 只使用「纯整数」作为id值
--->
-<!--拖拽事件 * 必须为catch 不可以bind * -->
-
+③  或者直接参考 第②条规则 只使用「纯整数」作为id值 -->
+<!-- 拖拽事件 * 必须为catch 不可以bind * -->
 <view class="container">
   <view class="outer">
     <view id="0" class="inner {{topList[0]}}" style="{{styles[0]}}" catchtouchstart="ondragstart" catchtouchmove="ondrag" catchtouchend="ondragend">
@@ -48,6 +45,7 @@
     </view>
   </view>
 </view>
-<view class="confirm" bindtap="onConfirm">确定
+<view class="confirm" bindtap="onConfirm">
+  确定
   <text class="fa fa-check" aria-hidden="true"></text>
 </view>

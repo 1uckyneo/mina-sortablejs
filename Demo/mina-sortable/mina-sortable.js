@@ -74,7 +74,7 @@ class Sortable {
 
     }
 
-    /* 打乱顺序  *  只在init函数第二个参数为true才触发 */
+    /* 打乱顺序  *  只在init函数为参数为true才触发 */
 
     disorder(topList) {
 
@@ -154,11 +154,11 @@ class Sortable {
         this.cssList[0] = this.styles;
         this.cssList[1] = this.topList;
 
-        //元素向下拖动时
         if (this.directionY > 0) {
+            //元素向下拖动时
             this.moveDownward();
-            //元素向上拖动时
         } else if (this.directionY < 0) {
+            //元素向上拖动时
             this.moveUpward();
         }
 

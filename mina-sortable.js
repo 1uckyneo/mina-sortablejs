@@ -2,28 +2,12 @@ class Sortable {
 
     constructor(arg) {
 
+
+
         this.topList = arg.topList;
         this.topAvg = arg.topAvg;
         this.spaceLimit = arg.spaceLimit ? arg.spaceLimit : this.topAvg / 2;
         this.opacity = arg.opacity ? arg.opacity : .5;
-
-        /*
-
-        topList
-        控制所有元素top值的CSS属性数组
-
-        topAvg
-        上一个拖拽元素顶部与下一个拖拽元素顶部的间距
-
-        spaceLimit
-        所有拖拽元素的上下区间
-        可选
-
-        targetOpacity
-        被拖拽元素透明度
-        可选 默认值0.5
-
-        */
 
         this.itemCount = this.topList.length; //拖拽元素的数量
         this.target = null; //被拖拽元素
